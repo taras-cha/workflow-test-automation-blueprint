@@ -10,7 +10,3 @@ uv venv
 uv sync --only-group integration-tests --no-default-groups --no-dev
 uv run python -m pytest -m integration_test
 
-
-git clone https://github.com/taras-cha/workflow-test-automation-blueprint.git
-
-
