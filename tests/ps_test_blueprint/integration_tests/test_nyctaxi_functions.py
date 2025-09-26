@@ -2,11 +2,12 @@ import pytest
 
 try:
     from databricks.connect import DatabricksSession as SparkSession
-    from pyspark.sql import DataFrame
+    
 except ImportError:
-    from pyspark.sql import DataFrame, SparkSession as SparkSession
+    from pyspark.sql import SparkSession as SparkSession
 
-from taras.nyctaxi_functions import *
+from pyspark.sql import DataFrame
+from ps_test_blueprint.nyctaxi_functions import *
 
 
 # @pytest.mark.integration_test
