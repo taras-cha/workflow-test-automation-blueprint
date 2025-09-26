@@ -1,6 +1,6 @@
 import pyspark.sql.connect.session
 import pytest
-from taras.nyctaxi_functions import *
+from ps_test_blueprint.nyctaxi_functions import *
 
 
 @pytest.mark.integration_test
