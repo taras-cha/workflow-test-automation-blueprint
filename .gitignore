@@ -1,4 +1,4 @@
-pyproject.toml
-src/ps_test_blueprint/__pycache__/nyctaxi_functions.cpython-313.pyc
-tests/ps_test_blueprint/integration_tests/__pycache__/test_nyctaxi_functions.cpython-313-pytest-8.4.2.pyc
-tests/taras/integration_tests/__pycache__/test_nyctaxi_functions.cpython-313-pytest-8.4.2.pyc
+uv.lock
+__pycache__
+src/__pycache__/
+tests/integration_tests/__pycache__/
