@@ -11,17 +11,21 @@ dependencies = [
 ]
 
 [dependency-groups]
+dev = [
+    "pytest>=8.3.4",
+    "pandas"
+]
 unit-tests = [
     # Thise will break integration test relying on databricks-connect
-    #"pyspark>=4.0.0,<5.0.0",
+    "pyspark>=4.0.0,<5.0.0"
+
 ]
 integration-tests = [
-    "databricks-connect==17.1.0",
-    "pytest>=8.3.4",
+    "databricks-connect==17.1.0"
 ]
 
 [tool.uv]
-default-groups = ["unit-tests"]
+default-groups = ["dev"]
 
 # [project.scripts]
 
