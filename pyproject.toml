@@ -1,5 +1,5 @@
 [project]
-name = "integration-test-template"
+name = "ps_test_blueprint"
 version = "0.1.0"
 description = "Integration test"
 readme = "README.md"
@@ -35,3 +35,7 @@ build-backend = "hatchling.build"
 
 [tool.hatch.build.targets.wheel]
 packages = ["src/ps_test_blueprint"]
+
+
+[project.scripts]
+main = "ps_test_blueprint.main:main"

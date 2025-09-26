@@ -1,0 +1,42 @@
+# The main job for workflow_test_automation_blueprint.
+resources:
+  jobs:
+    workflow_test_automation_blueprint_job:
+      name: workflow_test_automation_blueprint_job
+
+      trigger:
+        # Run this job every day, exactly one day from the last run; see https://docs.databricks.com/api/workspace/jobs/create#trigger
+        periodic:
+          interval: 1
+          unit: DAYS
+
+      email_notifications:
+        on_failure:
+          - karim.hamed@databricks.com
+
+      tasks:
+        - task_key: notebook_task
+          # job_cluster_key: job_cluster
+          python_wheel_task:
+            entry_point: main        # The function to run (e.g., main)
+            package_name: ps_test_blueprint # The package name in your wheel
+            parameters: ["testing_blueprint"]
+          environment_key: default
+          # libraries:
+          #     - whl: ../dist/*.whl
+        
+      # job_clusters:
+      #   - job_cluster_key: job_cluster
+      #     new_cluster:
+      #       spark_version: 17.1.x-scala2.13
+      #       node_type_id: Standard_D3_v2
+
+      environments:
+        - environment_key: default
+
+          # Full documentation of this spec can be found at:
+          # https://docs.databricks.com/api/workspace/jobs/create#environments-spec
+          spec:
+            environment_version: '3'
+            dependencies:
+              - ../dist/*.whl

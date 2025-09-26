@@ -6,7 +6,7 @@ except ImportError:
     from pyspark.sql import SparkSession as SparkSession
 
 from pyspark.sql import DataFrame
-from nyctaxi_functions import *
+from ps_test_blueprint.nyctaxi_functions import *
 
 
 # @pytest.mark.integration_test
