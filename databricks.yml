@@ -21,16 +21,15 @@ targets:
     mode: development
     default: true
     workspace:
-      host: https://adb-984752964297111.11.azuredatabricks.net
+      host: https://adb-xxxx.x.azuredatabricks.net
 
   prod:
     mode: production
     workspace:
-      host: https://adb-984752964297111.11.azuredatabricks.net
-      # We explicitly specify /Workspace/Users/karim.hamed@databricks.com to make sure we only have a single copy.
-      root_path: /Workspace/Users/karim.hamed@databricks.com/.bundle/${bundle.name}/${bundle.target}
+      host: https://adb-xxxx.x.azuredatabricks.net
+      root_path: /Workspace/tests/.bundle/${bundle.name}/${bundle.target}
     permissions:
-      - user_name: karim.hamed@databricks.com
+      - user_name: example@email.com
         level: CAN_MANAGE
     run_as:
-      user_name: karim.hamed@databricks.com
+      user_name: example@email.com
