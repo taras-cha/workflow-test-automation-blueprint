@@ -20,16 +20,3 @@ targets:
     # See also https://docs.databricks.com/dev-tools/bundles/deployment-modes.html.
     mode: development
     default: true
-    workspace:
-      host: https://adb-xxxx.x.azuredatabricks.net
-
-  prod:
-    mode: production
-    workspace:
-      host: https://adb-xxxx.x.azuredatabricks.net
-      root_path: /Workspace/tests/.bundle/${bundle.name}/${bundle.target}
-    permissions:
-      - user_name: example@email.com
-        level: CAN_MANAGE
-    run_as:
-      user_name: example@email.com
