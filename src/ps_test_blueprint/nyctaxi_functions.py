@@ -1,9 +1,9 @@
 try:
     from databricks.connect import DatabricksSession as SparkSession
-    from pyspark.sql import DataFrame, functions as F
 except ImportError:
-    from pyspark.sql import DataFrame, SparkSession as SparkSession
+    from pyspark.sql import SparkSession as SparkSession
 
+from pyspark.sql import DataFrame, functions as F
 
 def get_spark() -> SparkSession:
   # This should be changed to use Spark in Local mode for unit tests
@@ -17,4 +17,4 @@ def get_nyctaxi_trips() -> DataFrame:
 
 
 def calculate_avg_distance(df):
-  return df.groupBy("pickup_zip").avg("trip_distance")
+  return df.groupBy("pickup_zip").agg(F.avg("trip_distance").alias("avg"))
