@@ -129,6 +129,35 @@ uv sync --only-group integration-tests
 uv run python -m pytest -rsx -m integration_test --job-name="<job-name-to-test>"
 ```
 
+##### Running SDP Pipeline Integration Tests
+
+The repository also includes an integration test for a Lakeflow Spark Declarative Pipeline (SDP) with streaming tables. The test:
+
+1. Looks up the deployed pipeline by name and reads its spec.
+2. Creates an ephemeral schema for isolation (via `make_schema`).
+3. Creates a fresh, isolated pipeline instance targeting the ephemeral schema.
+4. Triggers a `full_refresh` update (clears all streaming checkpoints and table data) and waits for completion.
+5. Verifies the update status is `COMPLETED` (not just `IDLE`) and validates that both the streaming table and materialized view contain data.
+6. Cleans up the test pipeline in a `finally` block.
+
+Deploy the pipeline and run the test:
+
+```
+databricks bundle deploy -t dev
+```
+
+```
+uv run python -m pytest -rsx -m integration_test --pipeline-name="<pipeline-name-to-test>"
+```
+
+You can run both job and pipeline tests together:
+
+```
+uv run python -m pytest -rsx -m integration_test \
+  --job-name="<job-name-to-test>" \
+  --pipeline-name="<pipeline-name-to-test>"
+```
+
 
 ***
 
