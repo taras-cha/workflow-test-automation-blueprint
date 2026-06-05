@@ -3,9 +3,9 @@ resources:
     nyctaxi_sdp_pipeline:
       name: nyctaxi_sdp_pipeline
       catalog: main
-      target: default
+      schema: default
       serverless: true
-      development: true
+      root_path: ../src
       libraries:
         - file:
             path: ../src/ps_test_blueprint/nyctaxi_pipeline.py
