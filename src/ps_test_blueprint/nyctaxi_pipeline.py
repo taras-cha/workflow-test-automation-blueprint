@@ -1,7 +1,7 @@
 from pyspark import pipelines as dp
 
 from .nyctaxi_functions import calculate_avg_distance
-from utils import read_table
+from .utils import read_table
 
 
 @dp.table(comment="Raw NYC Taxi trips as streaming table")
