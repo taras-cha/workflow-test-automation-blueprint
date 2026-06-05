@@ -8,9 +8,6 @@ except ImportError:
     from pyspark.sql import SparkSession as SparkSession
 
 
-# What the `test_pipeline` fixture hands back: the created pipeline's id plus the
-# catalog/schema it publishes to, so the test can drive it and read its tables.
-# Note: must not be named `Test*` or pytest tries to collect it as a test class.
 CreatedPipeline = namedtuple("CreatedPipeline", ["pipeline_id", "catalog", "schema"])
 
 
@@ -37,10 +34,7 @@ def deployed_pipeline_spec(ws, request):
 def test_pipeline(ws, make_schema, deployed_pipeline_spec):
     """Create a fresh, isolated pipeline mirroring the deployed one.
 
-    Inherits the deployed pipeline's full configuration (libraries, root_path,
-    serverless, etc.) and overrides only what must be unique to this run: a
-    test-specific name and a freshly created ephemeral schema to publish to.
-    The pipeline is deleted on teardown.
+    Inherits the deployed pipeline's full configuration and overrides only what must be unique to this run
     """
     catalog_name = "main"
     schema_name = make_schema(catalog_name=catalog_name).name
