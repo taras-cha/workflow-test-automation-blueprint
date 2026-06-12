@@ -31,7 +31,7 @@ def deployed_pipeline_spec(ws, request):
 
 
 @pytest.fixture
-def test_pipeline(ws, make_schema, deployed_pipeline_spec):
+def test_pipeline(make_schema, make_pipeline, deployed_pipeline_spec):
     """Create a fresh, isolated pipeline mirroring the deployed one.
 
     Inherits the deployed pipeline's full configuration and overrides only what must be unique to this run
@@ -42,20 +42,18 @@ def test_pipeline(ws, make_schema, deployed_pipeline_spec):
     test_pipeline_spec = deployed_pipeline_spec.as_shallow_dict()
     test_pipeline_spec.pop("id", None)
     test_pipeline_spec.pop("deployment", None)
+    test_pipeline_spec["clusters"] = []  # serverless: stop make_pipeline injecting a classic cluster
 
     test_pipeline_spec["name"] = f"test_{deployed_pipeline_spec.name}_{schema_name}"
     test_pipeline_spec["catalog"] = catalog_name
     test_pipeline_spec["schema"] = schema_name
 
-    created = ws.pipelines.create(**test_pipeline_spec)
-    try:
-        yield CreatedPipeline(
-            pipeline_id=created.pipeline_id,
-            catalog=catalog_name,
-            schema=schema_name,
-        )
-    finally:
-        ws.pipelines.delete(created.pipeline_id)
+    created = make_pipeline(**test_pipeline_spec)
+    return CreatedPipeline(
+        pipeline_id=created.pipeline_id,
+        catalog=catalog_name,
+        schema=schema_name,
+    )
 
 
 @pytest.mark.integration_test
